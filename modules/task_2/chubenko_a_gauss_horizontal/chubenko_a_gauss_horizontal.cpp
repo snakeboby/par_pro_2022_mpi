@@ -4,7 +4,7 @@
 #include <cmath>
 #include <algorithm>
 #include <random>
-#include "../../../modules/task_2/chubenko_a_gauss_horizontal.h"
+#include "../../../modules/task_2/chubenko_a_gauss_horizontal/chubenko_a_gauss_horizontal.h"
 
 std::vector<double> getRandomVector(int sz) {
     std::random_device dev;
