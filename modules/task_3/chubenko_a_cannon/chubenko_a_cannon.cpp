@@ -4,7 +4,7 @@
 #include <string>
 #include <random>
 #include <algorithm>
-#include "../../../modules/task_3/chubenko_a_cannon.h"
+#include "../../../modules/task_3/chubenko_a_cannon/chubenko_a_cannon.h"
 
 
 std::vector<double> getRandomSquareMatrix(int sz) {
