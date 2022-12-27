@@ -54,7 +54,8 @@ std::vector<double> solve_gaussian_method(std::vector<double> matrix,
         }
 
         // For each row j below the pivot row, subtract a multiple of
-        // the pivot row from row j so that the pivot element in row j becomes zero
+        // the pivot row from row j so that the pivot element in row j
+        // becomes zero
         for (int j = i + 1; j < block_size; j++) {
             double factor = matrix[j * n + i] / matrix[i * n + i];
             for (int k = i; k < n; k++) {
@@ -96,17 +97,21 @@ std::vector<double> horizontalGaussianMethod(
 
     for (int i = 0; i < block_size; i++) {
         for (int j = 0; j < n; j++) {
-            local_matrix[i * n + j] = global_matrix[(rank * block_size + i) * n + j];
+            local_matrix[i * n + j] =
+                global_matrix[(rank * block_size + i) * n + j];
         }
         local_rhs[i] = global_rhs[rank * block_size + i];
     }
 
     // Solve the system of linear equations using the Gaussian method
-    local_solution = solve_gaussian_method(local_matrix, local_rhs, block_size, n);
+    local_solution = solve_gaussian_method(local_matrix, local_rhs,
+                                            block_size, n);
 
-    // Gather the solution vectors from all processes and combine them into a single solution vector
+    // Gather the solution vectors from all processes and
+    // combine them into a single solution vector
     std::vector<double> global_solution = std::vector<double>(n);
-    MPI_Gather(&local_solution[0], block_size, MPI_DOUBLE, &global_solution[0], block_size, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    MPI_Gather(&local_solution[0], block_size, MPI_DOUBLE,
+            &global_solution[0], block_size, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
     return global_solution;
 }
