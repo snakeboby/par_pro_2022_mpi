@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include "./chubenko_a_cannon.h"
-#include "gtest-mpi-listener.hpp"
+#include <gtest-mpi-listener.hpp>
 
 TEST(Parallel_Cannon_matrix_multiplication, Test_random_small) {
     int rank;
