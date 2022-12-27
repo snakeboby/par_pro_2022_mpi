@@ -8,19 +8,19 @@
 TEST(Parallel_Cannon_matrix_multiplication, Test_random_small) {
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	std::vector<double> mtx1, mtx2, res, res_seq;
+    std::vector<double> mtx1, mtx2, res, res_seq;
     const int count_size_mtx = 7;
 
     if (rank == 0) {
-		mtx1 = getRandomSquareMatrix(count_size_mtx);
-		mtx2 = getRandomSquareMatrix(count_size_mtx);
-		res_seq = getSequentialMultiplication(mtx1, mtx2, count_size_mtx);
+        mtx1 = getRandomSquareMatrix(count_size_mtx);
+        mtx2 = getRandomSquareMatrix(count_size_mtx);
+        res_seq = getSequentialMultiplication(mtx1, mtx2, count_size_mtx);
     }
 
-	res = getParallelCannonMultiplication(mtx1, mtx2, count_size_mtx);
+    res = getParallelCannonMultiplication(mtx1, mtx2, count_size_mtx);
 
     if (rank == 0) {
-		ASSERT_TRUE(matrixEqual(res, res_seq, count_size_mtx, 0.00001));
+        ASSERT_TRUE(matrixEqual(res, res_seq, count_size_mtx, 0.00001));
     }
 }
 
@@ -88,9 +88,9 @@ TEST(Parallel_Cannon_matrix_multiplication, Test_is_right) {
     const int count_size_mtx = 3;
 
     if (rank == 0) {
-		mtx1 = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-		mtx2 = { 2.3, 7.5, 1.2, 3.4, 5.6, 9.8, 4.5, 6.7, 8.9 };
-		res_expected = { 12.4, 19, 27.6, 43, 78.4, 87.3, 73.6, 137.8, 147 };
+        mtx1 = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+        mtx2 = { 2.3, 7.5, 1.2, 3.4, 5.6, 9.8, 4.5, 6.7, 8.9 };
+        res_expected = { 12.4, 19, 27.6, 43, 78.4, 87.3, 73.6, 137.8, 147 };
         res_seq = getSequentialMultiplication(mtx1, mtx2, count_size_mtx);
     }
 
